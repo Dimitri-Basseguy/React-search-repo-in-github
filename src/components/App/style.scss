@@ -1,0 +1,16 @@
+.header {
+  text-align: center;
+
+  &--img{
+    padding-top: 2rem;
+    width: 200px;
+  }
+}
+
+.app {
+  width: 90%;
+  max-width:  calc(290px * 3 + 4rem);
+  margin: auto;
+  padding: 1rem;
+  background-color: #F5F6FB;
+}
