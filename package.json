@@ -57,6 +57,7 @@
   "dependencies": {
     "prop-types": "*",
     "react": "*",
-    "react-dom": "*"
+    "react-dom": "*",
+    "semantic-ui-react": "^2.0.1"
   }
 }
