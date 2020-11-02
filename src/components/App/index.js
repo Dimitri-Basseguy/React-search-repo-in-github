@@ -18,16 +18,18 @@ const App = () => {
   /** Valeur du champ de recherche */
   const [search, setSearch] = useState('');
 
-  const handleChangeSearch = (newValue) => {
-    setSearch(newValue);
-  };
+  // Fonction utile si on veux faire du console.log()
+  // setSearchValue={handleChangeSearch}
+  // const handleChangeSearch = (newValue) => {
+  //   setSearch(newValue);
+  // };
 
   return (
     <div className="app">
       <header className="header">
         <img className="header--img" src={logo} alt="" />
       </header>
-      <SearchBar searchValue={search} setSearchValue={handleChangeSearch} />
+      <SearchBar searchValue={search} setSearchValue={setSearch} />
       <Message />
       <ReposResults repos={reposData.items} />
       <footer>Made by Dimitri Basseguy</footer>
