@@ -24,12 +24,20 @@ const App = () => {
   //   setSearch(newValue);
   // };
 
+  const loadRepos =() => {
+    console.log('on va charger les repos');
+  };
+
   return (
     <div className="app">
       <header className="header">
         <img className="header--img" src={logo} alt="" />
       </header>
-      <SearchBar searchValue={search} setSearchValue={setSearch} />
+      <SearchBar
+        searchValue={search}
+        setSearchValue={setSearch}
+        handleSubmit={loadRepos}
+      />
       <Message />
       <ReposResults repos={reposData.items} />
       <footer>Made by Dimitri Basseguy</footer>
