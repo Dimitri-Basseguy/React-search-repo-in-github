@@ -1,19 +1,33 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Card, Image } from 'semantic-ui-react';
 
-const Repo = () => (
+const Repo = ({ name, description, owner }) => (
   <Card>
-    <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' wrapped ui={false} />
+    <Image src={owner.avatar_url} wrapped ui={false} />
     <Card.Content>
-      <Card.Header>Matthew</Card.Header>
+      <Card.Header>{name}</Card.Header>
       <Card.Meta>
-        Meta
+        {owner.login}
       </Card.Meta>
       <Card.Description>
-        Description du repository
+        {description}
       </Card.Description>
     </Card.Content>
   </Card>
 );
+
+Repo.propTypes = {
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  owner: PropTypes.shape({
+    login: PropTypes.string.isRequired,
+    avatar_url: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+Repo.defaultProps = {
+  description: '',
+};
 
 export default Repo;

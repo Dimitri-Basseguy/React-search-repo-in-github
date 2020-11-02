@@ -9,6 +9,8 @@ import Message from '../Message';
 import SearchBar from '../SearchBar';
 import ReposResults from '../ReposResults';
 
+import reposData from '../../data/repos';
+
 import './style.scss';
 
 // == Composant
@@ -19,7 +21,7 @@ const App = () => (
     </header>
     <SearchBar />
     <Message />
-    <ReposResults />
+    <ReposResults repos={reposData.items} />
     <footer>Made by Dimitri Basseguy</footer>
   </div>
 );
