@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // == Import npm
 import React, { useState } from 'react';
 import axios from 'axios';
@@ -40,9 +41,19 @@ const App = () => {
       });
   };
 
-  const message = `La recherche a retourné ${nbResults} résultats, pour la requète : "${search}"`;
+  let message;
+  if (nbResults === 0) {
+    message = `La recherche n'a retourné aucun résultat, pour la requète : "${search}"`;
+  }
+  else if (nbResults > 1) {
+    message = `La recherche a retourné ${nbResults} résultats, pour la requète : "${search}"`;
+  }
+  else {
+    message = `La recherche a retourné ${nbResults} résultat, pour la requète : "${search}"`;
+  }
 
   return (
+    <>
     <div className="app">
       <header className="header">
         <img className="header--img" src={logo} alt="" />
@@ -55,8 +66,9 @@ const App = () => {
       />
       <Message message={message} />
       <ReposResults repos={reposResults} />
-      <footer>Made by Dimitri Basseguy</footer>
     </div>
+    <footer centered >Made by Dimitri Basseguy</footer>
+    </>
   );
 };
 // == Export
