@@ -1,11 +1,16 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import { Message as MessageSemanticUI  } from 'semantic-ui-react';
+import { Message as MessageSemanticUI } from 'semantic-ui-react';
 
-const Message = () => (
+const Message = ({ message }) => (
   <MessageSemanticUI>
     {/* <MessageSemanticUI.Header>Changes in Service</MessageSemanticUI.Header> */}
-    La recherche a donné 212 repos
+    {message}
   </MessageSemanticUI>
 );
+
+Message.propTypes = {
+  message: PropTypes.string.isRequired,
+};
 
 export default Message;
