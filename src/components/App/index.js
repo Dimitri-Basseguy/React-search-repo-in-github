@@ -2,6 +2,7 @@
 // == Import npm
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Dimmer, Loader } from 'semantic-ui-react';
 // import { Image } from 'semantic-ui-react';
 
 // == Import
@@ -17,9 +18,10 @@ import './style.scss';
 const App = () => {
   /** Valeur du champ de recherche */
   const [search, setSearch] = useState('');
-  // const [results, setResults] = useState(null);
   const [reposResults, setReposResults] = useState([]);
   const [nbResults, setNbresults] = useState(0);
+  const [showError, setShowError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // Fonction utile si on veux faire du console.log()
   // setSearchValue={handleChangeSearch}
@@ -28,21 +30,30 @@ const App = () => {
   // };
 
   const loadRepos = () => {
-    // console.log('on va charger les repos');
+    // Affichage du loarder
+    setLoading(true);
+
     axios.get(`https://api.github.com/search/repositories?q=${search}`)
       .then((response) => {
-        console.log('+ + + reposResults : + + + ', response.data.items);
         setReposResults(response.data.items);
         setNbresults(response.data.total_count);
-        console.log('+ + + nbResults : + + + ', response.data.total_count);
+        setShowError(false);
       })
       .catch((error) => {
-        console.warn('+ + + Erreur : + + +', error);
+        setShowError(true);
+        setReposResults([]);
+        // setNbresults(0);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
   let message;
-  if (nbResults === 0) {
+  if (showError) {
+    message = 'Une erreur s\'est produite';
+  }
+  else if (nbResults === 0) {
     message = `La recherche n'a retourné aucun résultat, pour la requète : "${search}"`;
   }
   else if (nbResults > 1) {
@@ -53,7 +64,6 @@ const App = () => {
   }
 
   return (
-    <>
     <div className="app">
       <header className="header">
         <img className="header--img" src={logo} alt="" />
@@ -66,9 +76,13 @@ const App = () => {
       />
       <Message message={message} />
       <ReposResults repos={reposResults} />
+      {loading && (
+        <Dimmer active inverted>
+          <Loader />
+        </Dimmer>
+      )}
+      <footer className="footer">Made by Dimitri Basseguy</footer>
     </div>
-    <footer centered >Made by Dimitri Basseguy</footer>
-    </>
   );
 };
 // == Export
