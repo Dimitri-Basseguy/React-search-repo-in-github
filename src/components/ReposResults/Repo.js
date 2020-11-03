@@ -5,15 +5,8 @@ import { Card, Image, Icon } from 'semantic-ui-react';
 const Repo = ({
   name, description, owner, watchers, html_url,
 }) => (
-  <Card>
-    <Image
-      src={owner.avatar_url} wrapped ui={false}
-      as="a"
-      size="medium"
-      href={html_url}
-      target="_blank"
-    />
-
+  <Card href={html_url}>
+    <Image src={owner.avatar_url} wrapped ui={false} />
     <Card.Content>
       <Card.Header>{name}</Card.Header>
       <Card.Meta>
