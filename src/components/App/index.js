@@ -40,6 +40,7 @@ const App = () => {
         setShowError(false);
       })
       .catch((error) => {
+        // console.log('+ + + Errors : + + +', { error });
         setShowError(true);
         setReposResults([]);
         // setNbresults(0);
@@ -78,7 +79,7 @@ const App = () => {
       <ReposResults repos={reposResults} />
       {loading && (
         <Dimmer active inverted>
-          <Loader />
+          <Loader size="large" />
         </Dimmer>
       )}
       <footer className="footer">Made by Dimitri Basseguy</footer>
