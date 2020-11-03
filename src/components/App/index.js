@@ -22,12 +22,18 @@ const App = () => {
   const [nbResults, setNbresults] = useState(0);
   const [showError, setShowError] = useState(false);
   const [loading, setLoading] = useState(false);
+  /** Valeur du champ de recherche */
+  const [displayMessage, setDisplayMessage] = useState(false);
 
   // Fonction utile si on veux faire du console.log()
   // setSearchValue={handleChangeSearch}
   // const handleChangeSearch = (newValue) => {
   //   setSearch(newValue);
   // };
+
+  const hideMessage = () => {
+    setDisplayMessage(false);
+  };
 
   const loadRepos = () => {
     // Affichage du loarder
@@ -47,6 +53,7 @@ const App = () => {
       })
       .finally(() => {
         setLoading(false);
+        setDisplayMessage(true);
       });
   };
 
@@ -75,7 +82,9 @@ const App = () => {
         setSearchValue={setSearch}
         handleSubmit={loadRepos}
       />
-      <Message message={message} />
+      {displayMessage && (
+        <Message message={message} hideMessage={hideMessage} />
+      )}
       <ReposResults repos={reposResults} />
       {loading && (
         <Dimmer active inverted>

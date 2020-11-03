@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { Form, Input } from 'semantic-ui-react';
 
 const SearchBar = ({ searchValue, setSearchValue, handleSubmit }) => {
+  // déclaration d'unr ref pour ciblé un élément
   const searchInput = useRef(null);
 
   useEffect(() => {
+    // Mise en place du focus sur l'input
     searchInput.current.focus();
   }, []);
 
@@ -21,7 +23,7 @@ const SearchBar = ({ searchValue, setSearchValue, handleSubmit }) => {
           iconPosition="left"
           placeholder="Recherche..."
           value={searchValue}
-          ref={searchInput}
+          ref={searchInput} // ciblage de l'élément
           onChange={(event) => {
             setSearchValue(event.target.value);
           }}
