@@ -3,10 +3,17 @@ import PropTypes from 'prop-types';
 import { Card, Image, Icon } from 'semantic-ui-react';
 
 const Repo = ({
-  name, description, owner, watchers,
+  name, description, owner, watchers, html_url,
 }) => (
   <Card>
-    <Image src={owner.avatar_url} wrapped ui={false} />
+    <Image
+      src={owner.avatar_url} wrapped ui={false}
+      as="a"
+      size="medium"
+      href={html_url}
+      target="_blank"
+    />
+
     <Card.Content>
       <Card.Header>{name}</Card.Header>
       <Card.Meta>
@@ -27,6 +34,7 @@ Repo.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string,
   watchers: PropTypes.number.isRequired,
+  html_url: PropTypes.string.isRequired,
   owner: PropTypes.shape({
     login: PropTypes.string.isRequired,
     avatar_url: PropTypes.string.isRequired,
